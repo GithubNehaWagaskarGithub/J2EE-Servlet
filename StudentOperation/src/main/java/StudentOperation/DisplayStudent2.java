@@ -1,0 +1,58 @@
+package StudentOperation;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet("/displayStudentData2")
+public class DisplayStudent2 extends HttpServlet
+{
+	Connection con;
+	PreparedStatement pStmt;
+	@Override
+	public void init() throws ServletException 
+	{
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			try {
+				con=DriverManager.getConnection("jdbc:mysql://localhost:3306/1eja9","root","Neha@123");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	{
+		String query="select Name from studentservlet";
+		
+		ResultSet rs;
+		try {
+			pStmt=con.prepareStatement(query);
+			rs=pStmt.executeQuery();
+			PrintWriter pw=resp.getWriter();
+			pw.print("</table border='1' rules='all'><tr><th>Name</th></tr>");
+			while(rs.next())
+			{
+				pw.print("<tr>");
+				pw.print("<td>"+rs.getString(1)+"</td>");
+				pw.print("</tr>");
+			}
+			pw.print("</table>");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
