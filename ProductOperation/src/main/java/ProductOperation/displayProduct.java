@@ -44,11 +44,19 @@ public class displayProduct extends HttpServlet
 			pStmt=con.prepareStatement(displayQuery);
 			rs=pStmt.executeQuery();
 			PrintWriter pw=resp.getWriter();
-			pw.print("<h1>Id\tName\tCategory\tSub-Category\tPrice\tQty</h1>");
+			pw.print("<table border='1' rules='all'><tr><th>ID</th><th>NAME</th><th>CATEGORY</th><th>SUB-CATEGORY</th><th>PRICE</th><th>QTY</th></tr>");
 			while(rs.next())
 			{
-				pw.print(rs.getInt(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3)+"\t"+rs.getString(4)+"\t"+rs.getDouble(5)+"\t"+rs.getInt(6)+"\n");
+				pw.print("<tr>");
+				pw.print("<td>"+rs.getInt(1)+"</td>");
+				pw.print("<td>"+rs.getString(2)+"</td>");
+				pw.print("<td>"+rs.getString(3)+"</td>");
+				pw.print("<td>"+rs.getString(4)+"</td>");
+				pw.print("<td>"+rs.getDouble(5)+"</td>");
+				pw.print("<td>"+rs.getInt(6)+"</td>");
+				pw.print("</tr>");
 			}
+			pw.print("</table>");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
