@@ -17,16 +17,16 @@ public class ServletController extends HttpServlet
 		String path=req.getServletPath();
 		switch (path) 
 		{
-		case "/addlink": 
-		{
-			addData(req, resp);
-			break;
-		}
-		case "/displaylink":
-		{
-			displayData(req, resp);
-			break;
-		}
+			case "/addlink": 
+			{
+				addData(req, resp);
+				break;
+			}
+			case "/displaylink":
+			{
+				displayData(req, resp);
+				break;
+			}
 		}
 	}
 	private void addData(HttpServletRequest req, HttpServletResponse resp) 
@@ -50,5 +50,5 @@ public class ServletController extends HttpServlet
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}	
 }
